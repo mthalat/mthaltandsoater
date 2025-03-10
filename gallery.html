@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الصور - مظلات وسواتر</title>
+    <style>
+        /* الشريط العلوي */
+        .navbar {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .menu {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .title {
+            font-size: 18px;
+            text-align: center;
+            flex-grow: 1;
+        }
+        .contact-icon {
+            font-size: 24px;
+            text-decoration: none;
+            color: white;
+        }
+        /* تنسيق الصفحة */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            padding-top: 60px;
+        }
+        h1 {
+            margin: 20px 0;
+        }
+        /* تنسيق معرض الصور بثلاثة أعمدة وصور مربعة */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 20px;
+            max-width: 90%;
+            margin: auto;
+        }
+        .gallery img {
+            width: 100%;
+            aspect-ratio: 1/1; /* يجعل الصور مربعة */
+            object-fit: cover; /* يضمن ملء الصورة بدون تشويه */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        /* زر العودة */
+        .back-btn {
+            display: block;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            width: 200px;
+            margin: 20px auto;
+        }
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+        /* حقوق الطبع */
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        /* استجابة للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr); /* عمودين فقط في الشاشات الصغيرة */
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: repeat(1, 1fr); /* عمود واحد في الشاشات الأصغر */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <div class="navbar">
+        <a href="tel:‏‪0547579918‬‏" class="contact-icon">📞</a>
+        <div class="title">مظلات وسواتر</div>
+        <div class="menu">☰</div>
+    </div>
+
+    <!-- عنوان الصفحة -->
+    <h1>معرض الصور</h1>
+
+    <!-- معرض الصور بثلاثة أعمدة وصور مربعة -->
+    <div class="gallery">
+        <div class="slide">
+          <img src="IMG-20250217-WA0014.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0015.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0016.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0018.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0019.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0020.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0021.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0022.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0023.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0024.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0025.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0026.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0027.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0028.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0029.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0030.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0031.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0032.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0033.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0034.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0035.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0036.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0037.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0038.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0039.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0040.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0041.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0042.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0043.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0044.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0045.jpg" alt="صورة 3">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0046.jpg" alt="صورة 3">
+        </div>
+        
+
+    <!-- زر العودة -->
+    <a href="index.html" class="back-btn">🔙 العودة للصفحة الرئيسية</a>
+
+    <!-- حقوق الطبع والنشر -->
+    <footer>
+        &copy; 2025 جميع الحقوق محفوظة | مظلات وسواتر
+    </footer>
+</body>
+</html>

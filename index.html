@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مظلات وسواتر</title>
+  <style>
+    /* الشريط العلوي */
+    .navbar {
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    .menu {
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .title {
+      font-size: 18px;
+      text-align: center;
+      flex-grow: 1;
+    }
+    .contact-icon {
+      font-size: 24px;
+      text-decoration: none;
+      color: white;
+    }
+    /* الهيدر */
+    .header {
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdo6ZyxN61bV6MtOFFTBSARDcsZm-4yK0YgOoFfQU-Rg&s');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      margin-top: 60px;
+      position: relative;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .header h1, .header p, .contact-buttons {
+      position: relative;
+      z-index: 1;
+    }
+    /* أزرار الاتصال وواتساب */
+    .contact-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    .contact-btn, .whatsapp-btn {
+      padding: 6px 10px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      border: 1px solid #ccc;
+    }
+    .contact-btn { background-color: yellow; color: black; }
+    .whatsapp-btn { background-color: green; color: white; }
+    .whatsapp-btn img {
+      width: 14px;
+      height: 14px;
+    }
+    /* الأقسام */
+    .gallery-btn {
+      display: block;
+      padding: 12px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .gallery-btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+    /* السلايدر */
+    .slider-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 350px;
+      border-radius: 10px;
+    }
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+      text-align: center;
+      position: relative;
+      height: 300px;
+    }
+    .slide img {
+      width: 90%;
+      height: 90%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    /* النص بين الصورة وزر "عرض التفاصيل" */
+    .slide .description {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.5;
+      padding: 0 10px;
+    }
+    /* زر "عرض التفاصيل" في أسفل الإطار */
+    .details-btn {
+      display: block;
+      padding: 12px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .details-btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    /* قسم الاتصال */
+    .contact-section {
+      background-color: black;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      margin: 20px auto;
+      width: 90%;
+    }
+    .contact-button {
+      display: block;
+      width: 80%;
+      margin: 10px auto;
+      padding: 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .call { background-color: blue; color: white; }
+    .whatsapp { background-color: green; color: white; }
+    .email { background-color: red; color: white; }
+    /* قسم "من نحن" */
+    .about-section {
+      background-color: #eee;
+      color: #333;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      margin: 20px auto;
+      width: 90%;
+    }
+    /* تنسيق النافذة الجانبية */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+      text-align: center;
+      z-index: 1001;
+    }
+    .sidebar a {
+      padding: 15px;
+      text-decoration: none;
+      font-size: 20px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+    }
+    .sidebar a:hover {
+      background-color: #444;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 25px;
+      color: white;
+      cursor: pointer;
+    }
+    /* قسم المصمم والموقع */
+    .designer-section {
+      background-color: #222;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+    .designer-section a {
+      color: yellow;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .designer-section a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- الشريط العلوي -->
+  <div class="navbar">
+    <a href="tel:‏‪0547579918‬‏" class="contact-icon">📞</a>
+    <div class="title">مظلات وسواتر</div>
+    <div class="menu" onclick="openSidebar()">☰</div>
+  </div>
+
+  <!-- النافذة الجانبية -->
+  <div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">✖</a>
+    <a href="#services">خدماتنا</a>
+    <a href="#gallery">معرض الصور</a>
+    <a href="#about">من نحن</a>
+    <a href="#contact">اتصل بنا</a>
+  </div>
+
+  <!-- الهيدر -->
+  <div class="header">
+    <h1>أفضل أنواع المظلات والسواتر والهناجر والبواب وجميع انواع الحداده</h1>
+    <p> متخصصون في تركيب جميع أنواع المظلات والسواتر بجودة عالية وأسعار تنافسية</p>
+    <div class="contact-buttons">
+      <a href="tel:‏‪0547579918‬‏" class="contact-btn">📞 اتصل بنا</a>
+      <a href="https://wa.me/+966‏‪547579918‬‏" class="whatsapp-btn"> واتساب</a>
+    </div>
+  </div>
+
+  <!-- قسم خدماتنا -->
+  <div class="section-box" id="services">
+    <h2 style="text-align: center;">خدماتنا</h2>
+    <div class="slider-container">
+      <button class="prev" onclick="moveSlide(-1, 'services-slider')">❮</button>
+      <div class="slider" id="services-slider">
+        <div class="slide">
+          <img src="IMG-20250217-WA0014.jpg" alt="مظلات">
+          <div class="description">
+            نحن نقدم أفضل أنواع المظلات التي توفر الحماية من الشمس والمطر بجودة عالية.اضغط على عرض التفاصيل لعرض تفاصيل المضلات
+          </div>
+          <a href="mthalat.html" class="details-btn">عرض التفاصيل</a>
+        </div>
+        <div class="slide">
+          <img src="ساتر حديد 12.jpg" alt="سواتر">
+          <div class="description">
+            سواترنا تتميز بالقوة والمتانة، وتوفير الخصوصية المثالية للمنازل والمشاريع.اضغط علا عرض التفاصيل لعرض مزيد من تفاصيل السواتر
+          </div>
+          <a href="sawater.html" class="details-btn">عرض التفاصيل</a>
+        </div>
+        <div class="slide">
+          <img src="c1.jpg" alt="جلسات">
+          <div class="description">
+            نحن نوفر جلسات خارجية مريحة وحديثة للاستخدام اليومي أو المناسبات الخاصة.اضغط على عرض التفاصيل لعرض تفاصيل الجلسات
+          </div>
+          <a href="garden.html" class="details-btn">عرض التفاصيل</a>
+        </div>
+      </div>
+      <button class="next" onclick="moveSlide(1, 'services-slider')">❯</button>
+    </div>
+    
+  <!-- معرض الصور -->
+  <div class="section-box" id="gallery" style="position: relative; min-height: 500px;">
+    <h2 style="text-align: center;">معرض الصور</h2>
+    <div class="slider-container">
+      <button class="prev" onclick="moveSlide(-1, 'gallery-slider')">❮</button>
+      <div class="slider" id="gallery-slider">
+        <div class="slide">
+          <img src="IMG-20250217-WA0013.jpg" alt="صورة 1">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0014.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0015.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0016.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0018.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0019.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0020.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0021.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0022.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0023.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0024.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0025.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0026.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0027.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0028.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0029.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0030.jpg" alt="صورة 2">
+        </div>
+        <div class="slide">
+          <img src="IMG-20250217-WA0031.jpg" alt="صورة 3">
+        </div>
+      </div>
+      <button class="next" onclick="moveSlide(1, 'gallery-slider')">❯</button>
+    </div>
+    <a href="gallery.html" class="gallery-btn">عرض جميع الصور</a>
+  </div>
+
+  <!-- قسم من نحن -->
+  <div class="about-section" id="about">
+    <h2>من نحن</h2>
+    <p>
+      نحن شركة متخصصة في تقديم أفضل الخدمات في مجال المظلات والسواتر والجلسات، نسعى دائمًا لتحقيق رضا عملائنا من خلال جودة منتجاتنا وخدماتنا المتميزة.جودة المواد: نستخدم أجود أنواع الحديد والمواد المقاومة للعوامل الجوية لضمان قوة الهيكل وطول عمره الافتراضي.
+
+احترافية التنفيذ: يعمل فريقنا من الحدادين المهرة وفق أعلى معايير الدقة والالتزام بالمواصفات المطلوبة.
+
+الضمان والثقة: نقدم ضمانًا على جميع أعمالنا، مما يعكس ثقتنا الكبيرة بجودة تنفيذنا وموادنا المستخدمة.
+
+التصميم حسب الطلب: نوفر تصاميم مخصصة تناسب احتياجات العملاء، سواء للهناجر الصناعية أو التجارية أو الزراعية.
+    </p>
+  </div>
+
+  <!-- قسم الاتصال -->
+  <div class="contact-section" id="contact">
+    <h2>اتصل بنا مباشرة 📞</h2>
+    <a href="tel:‏‪0547579918‬‏" class="contact-button call">📞 اتصل الآن</a>
+    <a href="https://wa.me/+966‏‪547579918‬‏" class="contact-button whatsapp">واتساب</a>
+    <a href="abdrbuh14@gmail.com" class="contact-button email">📧 البريد الإلكتروني</a>
+  </div>
+
+  <!-- قسم المصمم والموقع -->
+  <div class="designer-section">
+    <p> الموقع:<a href="https://example.com" target="_blank">المملكه العربيه السعوديه _ جده</a></p>
+    <p>تصميم وتطوير عبدربه العروي</p>
+  </div>
+
+  <!-- حقوق الطبع والنشر -->
+  <footer style="background-color: black; color: white; text-align: center; padding: 10px; margin-top: 20px;">
+    &copy; 2025 جميع الحقوق محفوظة | مظلات وسواتر
+  </footer>
+
+  <script>
+    let serviceIndex = 0;
+    let galleryIndex = 0;
+    let startX = 0;
+    let endX = 0;
+
+    function moveSlide(step, sliderId) {
+      let slider = document.getElementById(sliderId);
+      let slides = slider.querySelectorAll(".slide");
+
+      if (sliderId === "services-slider") {
+        serviceIndex = (serviceIndex + step + slides.length) % slides.length;
+        slider.style.transform = `translateX(-${serviceIndex * 100}%)`;
+      } else if (sliderId === "gallery-slider") {
+        galleryIndex = (galleryIndex + step + slides.length) % slides.length;
+        slider.style.transform = `translateX(-${galleryIndex * 100}%)`;
+      }
+    }
+
+    // دعم السحب (Swipe) للموبايل
+    function addSwipeSupport(sliderId) {
+      let slider = document.getElementById(sliderId);
+
+      slider.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+      });
+
+      slider.addEventListener("touchend", (e) => {
+        endX = e.changedTouches[0].clientX;
+        let swipeDistance = endX - startX;
+
+        if (swipeDistance > 50) {
+          moveSlide(-1, sliderId); // سحب لليمين
+        } else if (swipeDistance < -50) {
+          moveSlide(1, sliderId); // سحب لليسار
+        }
+      });
+    }
+
+    // تشغيل التمرير التلقائي كل 3 ثوانٍ
+    setInterval(() => moveSlide(1, "services-slider"), 3000);
+    setInterval(() => moveSlide(1, "gallery-slider"), 3000);
+
+    // تفعيل السحب بعد تحميل الصفحة
+    document.addEventListener("DOMContentLoaded", () => {
+      addSwipeSupport("services-slider");
+      addSwipeSupport("gallery-slider");
+    });
+
+    function openSidebar() {
+      document.getElementById("sidebar").style.width = "250px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").style.width = "0";
+    }
+  </script>
+</body>
+</html>
